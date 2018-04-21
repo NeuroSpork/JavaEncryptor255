@@ -1,14 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scytale;
 
 /**
- *
- * @author Akuma
  */
-public class Location {
+public class Location 
+{
+    String pathname;
+
+    public String getPathname() {
+        return pathname;
+    }
+
+    public void setPathname(String pathname) {
+        this.pathname = pathname;
+    }
     
+    public boolean compareLocation(Location destination)
+    {
+        boolean isEqual = false;
+        isEqual = pathname.equals(destination.getPathname());
+        return isEqual;
+    }
+    
+    public Location(String pathname) 
+    {
+        this.pathname = pathname;
+    }
 }

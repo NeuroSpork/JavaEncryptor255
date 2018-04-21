@@ -1,14 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scytale;
 
+import java.io.File;
+
 /**
- *
- * @author Akuma
  */
-public class ScytaleFile {
+public class ScytaleFile extends File
+{
+    Location loc; //pathname
+    boolean type; //encryption status: false = not encrypted, true = encrypted
+
+    public Location getLoc() {
+        return loc;
+    }
+
+    public void setLoc(Location loc) {
+        this.loc = loc;
+    }
+
+    public boolean isType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
+    }
     
+    public String getPathname()
+    {
+        return loc.getPathname();
+    }
+    
+    public ScytaleFile(String pathname) 
+    {
+        super(pathname);
+        loc = new Location(pathname);
+        type = false;
+    }
 }
