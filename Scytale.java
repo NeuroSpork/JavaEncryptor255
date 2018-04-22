@@ -10,6 +10,7 @@ import java.util.logging.Logger;
  */
 public class Scytale 
 {    
+    //boolean go = false;
     public static void main(String[] args) 
     {
         //DECLARATIONS
@@ -67,7 +68,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                 if(ed)
                 {
                     //eFile = new EncryptedFile("C:\\encryption\\Encrypted");//replace string with inputFile
-                    eFile = new EncryptedFile(inputFile);//replace string with inputFile
+                    eFile = new EncryptedFile(outputFile);//replace string with inputFile
                     
                     try {
                         eFile.createNewFile();
@@ -78,7 +79,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                     }
 
                     //dFile = new DecryptedFile("C:\\encryption\\Decrypted");//replace string with outputFile
-                    dFile = new DecryptedFile(outputFile);//replace string with outputFile
+                    dFile = new DecryptedFile(inputFile);//replace string with outputFile
                    
                     try {
                         //System.out.println("Target File exists?:" + !dFile.createNewFile()); //delete out after GUI added
@@ -102,7 +103,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                 else 
                 {
                     //dFile = new DecryptedFile("C:\\encryption\\Decrypted");//replace string with inputFile
-                    dFile = new DecryptedFile(inputFile);//replace string with inputFile
+                    dFile = new DecryptedFile(outputFile);//replace string with inputFile
 
                     try {
                         dFile.createNewFile();
@@ -113,7 +114,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                     }
 
                     //eFile = new EncryptedFile("C:\\encryption\\Encrypted");//replace string with outputFile
-                    eFile = new EncryptedFile(outputFile);//replace string with outputFile
+                    eFile = new EncryptedFile(inputFile);//replace string with outputFile
 
                     try {
                         //System.out.println("Target File exists?:" + !eFile.createNewFile()); //delete out after GUI added
