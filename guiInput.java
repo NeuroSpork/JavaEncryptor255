@@ -60,11 +60,11 @@ public class guiInput {
     
     public guiInput()
     {
-        input = new String("");
-        output = new String("");
-        ed = new String("");
-        password = new String("");
-        overWrite = new String("");
-        go = new String("");
+        input = "";
+        output = "";
+        ed = "";
+        password = "";
+        overWrite = "";
+        go = "";
     }
 }

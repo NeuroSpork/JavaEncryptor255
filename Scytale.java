@@ -34,18 +34,6 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
             guiInput GUIi = new guiInput();
             guiClass GUI = new guiClass(GUIi);
             GUI.setVisible(true);
-            /*System.out.println(inputFile);
-            System.out.println(outputFile);
-            System.out.println(ed);
-            System.out.println(passwordStr);
-            System.out.println(overWrite);
-            System.out.println(go);
-            
-           /* variables used in main filled in with GUI values = String inputFile, String outputFile, boolean ed, boolean overWrite, 
-        else
-            variables used in main filled in with args values = String inputFile, String outputFile, boolean ed (I'm thinking maybe use a char instead for cmd line 'e' vs 'd' - I'm thinking auto-overwrite from command line
-        */
-        
         //DO SCYTALE
             //-there should be no inputs needed past this point after GUI and command line are implemented
         while(quit != true)
@@ -54,13 +42,12 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
             outputFile = GUIi.getOutput();
             ed = GUIi.getEd().equals("true");
             passwordStr = GUIi.getPassword();
-            overWrite = GUIi.getOverWrite().equals("true"); 
+            //overWrite = GUIi.getOverWrite().equals("true"); 
+            overWrite = true;
             go = GUIi.getGo().equals("true");
             
-            if(go)
-                System.out.println("good");
-            go = true;
-            while (quit != true && go == true) //also add event go button boolean == true
+            System.out.println(go);
+            while (!quit && go) //also add event go button boolean == true
             {
                 System.out.println("doing stuff");
                 System.out.println(inputFile);
@@ -82,6 +69,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         //System.out.println("Origin File exists?:" + !eFile.createNewFile());//delete out after GUI added
                     } catch (IOException ex) {
                         Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("encrypting target file failed");
                     }
 
                     dFile = new DecryptedFile("C:\\Users\\Akuma\\Desktop\\Decrypted.txt");//replace string with outputFile
@@ -99,6 +87,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("encrypting origin file failed");
                     }
                 }
 
@@ -111,6 +100,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         //System.out.println("Origin File exists?:" + !dFile.createNewFile()); //delete out after GUI added
                     } catch (IOException ex) {
                         Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("decrypting target file failed");
                     }
 
                     eFile = new EncryptedFile("C:\\Users\\Akuma\\Desktop\\Encrypted.txt");//replace string with outputFile
@@ -128,6 +118,7 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("decrypting origin file failed");
                     }
                 }
 
@@ -135,24 +126,34 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                 if(cancel == false)
                 {
                     //System.out.println("Enter Password: "); //delete out after GUI added
-                    password = new Password(passwordStr, true);//replace string with passwordStr //boolean parameter overloads password to use self made hash instead of 3rd party hash, remove boolean for library's version
+                    password = new Password(passwordStr);//replace string with passwordStr //boolean parameter overloads password to use self made hash instead of 3rd party hash, remove boolean for library's version
 
                     //PERFORM CRYPTOGRAPHY
                     //CRYPTO MAGIC
-                    //System.out.println("Performing Crypto Magic"); //delete out after GUI added
+                    System.out.println("Performing Crypto Magic"); //delete out after GUI added
                     if(ed)
                     {
                         //ENCRYPTION
-                        //System.out.println("Encrypting"); //delete out after GUI added
-                        //System.out.println(eFile.getLoc().getPathname() + " from " + dFile.getLoc().getPathname() + " with " + password.getKey().length()*8 + " bit key hash"); //delete out after GUI added
-                        //GUI.success()?
+                        System.out.println("Encrypting"); //delete out after GUI added
+                        try {
+                            System.out.println(eFile.getLoc().getPathname() + " from " + dFile.getLoc().getPathname() + " with " + password.getKey().length()*8 + " bit key hash"); //delete out after GUI added
+                            eAlg = new EncryptionAlgorithm(password.getKey(), dFile, eFile);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("encrypting failed");
+                        }
                     }
                     else
                     {
                         //DECRYPTIONS
-                        //System.out.println("Decrypting"); //delete out after GUI added
-                        //System.out.println(eFile.getLoc().getPathname() + " into " + dFile.getLoc().getPathname() + " with " + password.getKey().length()*8 + " bit key hash"); //delete out after GUI added
-                        //GUI.success()?
+                        System.out.println("Decrypting"); //delete out after GUI added
+                        try {
+                            //System.out.println(eFile.getLoc().getPathname() + " into " + dFile.getLoc().getPathname() + " with " + password.getKey().length()*8 + " bit key hash"); //delete out after GUI added
+                            dAlg = new DecryptionAlgorithm(password.getKey(), dFile, eFile);
+                        } catch (IOException ex) {
+                            Logger.getLogger(Scytale.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println("decrypting failed");
+                        }
                     }
                 }
                 else

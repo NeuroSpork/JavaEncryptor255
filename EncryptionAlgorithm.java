@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scytale;
-import org.jasypt.*;
-import java.io.File.*;
-import java.nio.file.*
+
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.Arrays;
+import org.jasypt.util.binary.BasicBinaryEncryptor;
 /**
- *
- * @author Akuma
  */
-public class EncryptionAlgorithm {
-    public EncryptionAlgorithm(Byte[] byteK, DecryptedFile decFile, EncryptedFile encFile)
-	{
-		String stringK = new String(byteK);
-		BasicBinaryEncryptor encryptEverything = new BasicBinaryEncryptor();
-		encryptEverything.setPassword(stringK);
-		Path pathA = Paths.get(decFile.getPath());
-		byte[] opData = Files.readAllBytes(PathA);
-		byte[] finData = encryptEverything.encrypt(opData);
-		Files.write(Paths.get(encFile.getPath,finData);
-	}
+public class EncryptionAlgorithm extends CryptographicMethod
+{
+    public EncryptionAlgorithm(String stringK, DecryptedFile decFile, EncryptedFile encFile) throws IOException
+    {
+        BasicBinaryEncryptor encryptEverything = new BasicBinaryEncryptor();
+        encryptEverything.setPassword(stringK);
+        Path pathA = Paths.get(decFile.getPath());
+        byte[] opData = Files.readAllBytes(pathA);
+        System.out.println(Arrays.toString(opData));
+        byte[] finData = encryptEverything.encrypt(opData);
+        Files.write(Paths.get(encFile.getPath()),finData);
+    }
 }
