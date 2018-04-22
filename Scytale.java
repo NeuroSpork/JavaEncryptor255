@@ -45,10 +45,13 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
             //overWrite = GUIi.getOverWrite().equals("true"); 
             overWrite = true;
             go = GUIi.getGo().equals("true");
-            
-            System.out.println(go);
+            //int i = 0;
+            System.out.print(go + "\b\b\b\b\b"); //DO NOT DELETE, THIS IS A LOAD BEARING PRINT STATEMENT!!!!!
+            //if(go)
+              //    i=i+1;
             while (!quit && go) //also add event go button boolean == true
             {
+                /**
                 System.out.println("doing stuff");
                 System.out.println(inputFile);
                 System.out.println(outputFile);
@@ -58,12 +61,14 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                 System.out.println(go);
                 //System.out.println("encrypt or decrypt? 1/0: "); //delete out after GUI added
                 //ed = (in.nextInt() != 0); //delete out after GUI added
-
+                *       **/
                 //ACQUIRE FILES
                 //ENCRYPTION FILES ACQUISITION
                 if(ed)
                 {
-                    eFile = new EncryptedFile("C:\\Users\\Akuma\\Desktop\\Encrypted.txt");//replace string with inputFile
+                    //eFile = new EncryptedFile("C:\\encryption\\Encrypted");//replace string with inputFile
+                    eFile = new EncryptedFile(inputFile);//replace string with inputFile
+                    
                     try {
                         eFile.createNewFile();
                         //System.out.println("Origin File exists?:" + !eFile.createNewFile());//delete out after GUI added
@@ -72,7 +77,9 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         System.out.println("encrypting target file failed");
                     }
 
-                    dFile = new DecryptedFile("C:\\Users\\Akuma\\Desktop\\Decrypted.txt");//replace string with outputFile
+                    //dFile = new DecryptedFile("C:\\encryption\\Decrypted");//replace string with outputFile
+                    dFile = new DecryptedFile(outputFile);//replace string with outputFile
+                   
                     try {
                         //System.out.println("Target File exists?:" + !dFile.createNewFile()); //delete out after GUI added
                         if(!dFile.createNewFile())
@@ -94,7 +101,9 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                 //DECRYPTION FILES ACQUISITION
                 else 
                 {
-                    dFile = new DecryptedFile("C:\\Users\\Akuma\\Desktop\\Decrypted.txt");//replace string with inputFile
+                    //dFile = new DecryptedFile("C:\\encryption\\Decrypted");//replace string with inputFile
+                    dFile = new DecryptedFile(inputFile);//replace string with inputFile
+
                     try {
                         dFile.createNewFile();
                         //System.out.println("Origin File exists?:" + !dFile.createNewFile()); //delete out after GUI added
@@ -103,7 +112,9 @@ Scanner in = new Scanner(System.in);        //delete out after GUI added
                         System.out.println("decrypting target file failed");
                     }
 
-                    eFile = new EncryptedFile("C:\\Users\\Akuma\\Desktop\\Encrypted.txt");//replace string with outputFile
+                    //eFile = new EncryptedFile("C:\\encryption\\Encrypted");//replace string with outputFile
+                    eFile = new EncryptedFile(outputFile);//replace string with outputFile
+
                     try {
                         //System.out.println("Target File exists?:" + !eFile.createNewFile()); //delete out after GUI added
                         if(!eFile.createNewFile())

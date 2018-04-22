@@ -143,7 +143,7 @@ public class guiClass extends javax.swing.JFrame implements ActionListener
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnGo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGo1ActionPerformed
-        System.out.println("DEBUGDEBUGDEBUG");
+        //System.out.println("DEBUGDEBUGDEBUG");
     }//GEN-LAST:event_btnGo1ActionPerformed
 
     public void actionPerformed(ActionEvent evt)
@@ -217,7 +217,7 @@ public class guiClass extends javax.swing.JFrame implements ActionListener
             GUIi.setPassword(txtPassword.getText());
             GUIi.setOverWrite(overWrite); 
             GUIi.setGo("true");
-            System.out.println("GOOOOOOOOOOOO");
+            //System.out.println("GOOOOOOOOOOOO");
         }
     }
 

@@ -1,7 +1,10 @@
 package scytale;
 
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
+import org.jasypt.digest.config.SimpleDigesterConfig;
+import org.jasypt.salt.ZeroSaltGenerator;
 /**
  */
 public class Key
@@ -30,7 +33,15 @@ public class Key
     public Key(String password)
     {
         key = new byte[384];
-        StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        SimpleDigesterConfig tripleStupid = new SimpleDigesterConfig();
+
+        ZeroSaltGenerator stupid = new ZeroSaltGenerator();
+        tripleStupid.setSaltGenerator(stupid);
+        tripleStupid.setAlgorithm("SHA-256");
+        tripleStupid.setIterations(10000);
+        ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
+        //StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
+        passwordEncryptor.setConfig(tripleStupid);
         String [] s = new String[12];
         String keyS = "";
         s[0] = passwordEncryptor.encryptPassword(password); //256 bit hash = 64 char
