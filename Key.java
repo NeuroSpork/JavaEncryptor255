@@ -19,7 +19,7 @@ public class Key
             s = s + (char) key[i];
         }
         return s;
-    }
+    } //Grab key
     
     public void deleteKey() {
         for(int i = 0; i < 384; i++)
@@ -27,21 +27,21 @@ public class Key
             key[i] = 0;
         }
         key = null;
-    }
+    } //Nulls out key for security reasons.
     
     //Constructor using more secure open source library instead of our own less secure hash algorithm
     public Key(String password)
     {
         key = new byte[384];
-        SimpleDigesterConfig tripleStupid = new SimpleDigesterConfig();
+        SimpleDigesterConfig sConfig = new SimpleDigesterConfig();
 
-        ZeroSaltGenerator stupid = new ZeroSaltGenerator();
-        tripleStupid.setSaltGenerator(stupid);
-        tripleStupid.setAlgorithm("SHA-256");
-        tripleStupid.setIterations(10000);
+        ZeroSaltGenerator saltconf = new ZeroSaltGenerator(); //Using a lack of salt because for some reason the MD5 digester by default returns different results for the same input. This is suboptimal for key generation.
+        sConfig.setSaltGenerator(saltconf);
+        sConfig.setAlgorithm("SHA-256");
+        sConfig.setIterations(10000);
         ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
-        //StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-        passwordEncryptor.setConfig(tripleStupid);
+        //StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor(); //Old encryptor. Commented out for potential future changes.
+        passwordEncryptor.setConfig(sConfig);
         String [] s = new String[12];
         String keyS = "";
         s[0] = passwordEncryptor.encryptPassword(password); //256 bit hash = 64 char
